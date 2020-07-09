@@ -92,3 +92,48 @@ const helper = arr => {
         }
 }
 }
+const getNeighborPads = (x, y, size) => {
+    if (x >= size || y >= size || x <0 || y< 0){
+        return []
+    }
+    let shiftLeft
+    let shiftRight
+    let shiftDown
+    let shiftUp
+    if (x === 0){
+        shiftLeft = undefined
+        shiftRight =  x+1
+    } else if (x === (size -1)) {
+        shiftRight = undefined
+        shiftLeft = x-1
+    } else {
+        shiftRight = x+1
+        shiftLeft = x-1
+    }
+    if (y === 0){
+        shiftDown = undefined
+        shiftUp =  y+1
+    } else if (y === (size -1)) {
+        shiftUp = undefined
+        shiftDown = y-1
+    } else {
+        shiftUp = y+1
+        shiftDown = y-1
+    }
+    const left = [shiftLeft, y]
+    const right = [shiftRight, y]
+    const up = [x, shiftUp]
+    const down = [x, shiftDown]
+    const finalArray = [left, up, right, down]
+    const toReturn = []
+    for (let i = 0; i < finalArray.length; i++){
+        if (!finalArray[i].includes(undefined)){
+            toReturn.push(finalArray[i])
+        }
+    }
+    return toReturn
+
+    
+}
+
+//console.log(getNeighborPads(0,0,5))
